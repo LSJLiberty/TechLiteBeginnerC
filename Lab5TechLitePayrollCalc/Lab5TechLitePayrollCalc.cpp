@@ -19,6 +19,7 @@ string userFile;
 int totalHours = 0;
 const double HOURLY_RATE = 15.00;
 const double DAILY_RATE = 100.00;
+const int DAYS_IN_WEEK = 7;
 double grossPay;
 int noOrYes;
 bool stillRun = true;
@@ -34,7 +35,7 @@ int main() {
 	cout << fixed << setprecision(2);
 
 	//loops till quit option is selected
-	while (stillRun) {
+	do {
 		//resets variables
 		grossPay = 0;
 		totalHours = 0;
@@ -95,7 +96,7 @@ int main() {
 			case 2: {
 
 				//for loop to bring in input and adds to totalHours
-				for (int i = 1; i <= 7; i++) {
+				for (int i = 1; i <= DAYS_IN_WEEK; i++) {
 					int temp = 0;
 					cout << "Please enter the hours worked on day #" << i << ": ";
 					cin >> temp;
@@ -134,9 +135,12 @@ int main() {
 				grossPay = DAILY_RATE * days;
 
 				//print gross pay
-				cout << endl << "++++++++++++++++++++++++++++++++++++" << endl;
-				cout << "Employee gross pay: $" << grossPay << endl;
-				cout << "++++++++++++++++++++++++++++++++++++" << endl;
+				cout << endl << "+++++++++++++++++++++++++++++++++++++++++" << endl;
+				cout << left << setw(30) << "Total days worked:" << right << days << endl; //formating
+				cout << left << setw(29) << "Employee gross pay:"
+					<< right << setw(1) << "$" << left << setw(6) << grossPay << endl;
+
+				cout << "+++++++++++++++++++++++++++++++++++++++++" << endl;
 				break;
 			}
 
@@ -151,15 +155,17 @@ int main() {
 		}
 		if (userInput == 1 || userInput == 2) {
 			grossPay = totalHours * HOURLY_RATE;
-			cout << endl << "++++++++++++++++++++++++++++++++++++" << endl;
-			cout << "Total hours worked: " << totalHours << endl;
-			cout << "Employee gross pay: $" << grossPay << endl;
-			cout << "++++++++++++++++++++++++++++++++++++" << endl;
+			cout << endl << "+++++++++++++++++++++++++++++++++++++++++" << endl;
+			cout << left << setw(30) << "Total hours worked:" << right << totalHours << endl; //formating
+			cout << left << setw(29) << "Employee gross pay:" 
+				<< right << setw(1) << "$" << left << setw(6) << grossPay << endl;
+			cout << "+++++++++++++++++++++++++++++++++++++++++" << endl;
 		}
 		cout << endl << endl;
 
 
-	}
+	} while (stillRun);
+
 	system("pause");
 	return 0;
 
