@@ -13,18 +13,21 @@ Course/Section: CSCN111-005
 #include <cstdlib> //C standard library
 using namespace std;
 
-// Declaring variables
-int userInput;
-string userFile;
-int totalHours = 0;
+// Declaring constant variables
 const double HOURLY_RATE = 15.00;
 const double DAILY_RATE = 100.00;
 const int DAYS_IN_WEEK = 7;
-double grossPay;
-int noOrYes;
-bool stillRun = true;
 
 int main() {
+
+	// regular variables
+	int userInput;
+	string userFile;
+	int totalHours = 0;
+	double grossPay;
+	int noOrYes;
+	bool stillRun = true;
+
 
 	cout << "==================================================================" << endl;
 	cout << "                   TECHLITE PAYROLL CALCULATOR                    " << endl;
@@ -120,14 +123,15 @@ int main() {
 				while (noOrYes == 1) {
 					days++;
 					cout << "Current days to be paid: " << days << endl;
+					cout << "Add another day? Enter 0 for no and 1 for yes: ";
+					cin >> noOrYes;
 
-					while (true) {
-						cout << "Add another day? Enter 0 for no and 1 for yes: ";
-						cin >> noOrYes;
-						if (!cin.fail() && (noOrYes == 0 || noOrYes == 1)) break;
-						cout << "Invalid selection. Please enter 0 or 1." << endl;
+					while (cin.fail() || (noOrYes != 0 && noOrYes != 1)) {
 						cin.clear();
 						cin.ignore(1000, '\n');
+						cout << "Invalid input. Please only enter 0 for no and 1 for yes." << endl;
+						cout << "Add another day? Enter 0 for no and 1 for yes: " << endl;
+						cin >> noOrYes;
 					}
 				}
 
@@ -136,9 +140,8 @@ int main() {
 
 				//print gross pay
 				cout << endl << "+++++++++++++++++++++++++++++++++++++++++" << endl;
-				cout << left << setw(30) << "Total days worked:" << right << days << endl; //formating
-				cout << left << setw(29) << "Employee gross pay:"
-					<< right << setw(1) << "$" << left << setw(6) << grossPay << endl;
+				cout << left << setw(25) << "Total days worked:" << right << setw(10) << days << endl;
+				cout << left << setw(25) << "Employee gross pay:" << right << "$" << setw(9) << grossPay << endl;
 
 				cout << "+++++++++++++++++++++++++++++++++++++++++" << endl;
 				break;
@@ -156,9 +159,8 @@ int main() {
 		if (userInput == 1 || userInput == 2) {
 			grossPay = totalHours * HOURLY_RATE;
 			cout << endl << "+++++++++++++++++++++++++++++++++++++++++" << endl;
-			cout << left << setw(30) << "Total hours worked:" << right << totalHours << endl; //formating
-			cout << left << setw(29) << "Employee gross pay:" 
-				<< right << setw(1) << "$" << left << setw(6) << grossPay << endl;
+			cout << left << setw(25) << "Total hours worked:" << right << setw(10) << totalHours << endl;
+			cout << left << setw(25) << "Employee gross pay:" << right << "$" << setw(9) << grossPay << endl;
 			cout << "+++++++++++++++++++++++++++++++++++++++++" << endl;
 		}
 		cout << endl << endl;
